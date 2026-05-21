@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Src\Presentation\Cpanel\Controllers\OrderAssignmentController;
 use Src\Presentation\Cpanel\Controllers\DriverOrdersController;
+use Src\Presentation\Cpanel\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,14 @@ use Src\Presentation\Cpanel\Controllers\DriverOrdersController;
 */
 
 Route::prefix('orders')->group(function () {
+    // List all orders
+    Route::get('/', [OrdersController::class, 'index'])
+        ->name('orders.index');
+
+    // Get single order
+    Route::get('{id}', [OrdersController::class, 'show'])
+        ->name('orders.show');
+
     // Assign order to best available driver
     Route::post('{id}/assign', [OrderAssignmentController::class, 'assign'])
         ->name('orders.assign');
