@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Src\Presentation\Cpanel\Controllers\OrderAssignmentController;
+use Src\Presentation\Cpanel\Controllers\DriverOrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,18 @@ Route::prefix('orders')->group(function () {
     // Unassign order from driver
     Route::post('{id}/unassign', [OrderAssignmentController::class, 'unassign'])
         ->name('orders.unassign');
+});
+
+Route::prefix('drivers')->group(function () {
+    // Get all orders for a specific driver
+    Route::get('{id}/orders', [DriverOrdersController::class, 'index'])
+        ->name('drivers.orders.index');
+
+    // Get active orders for a specific driver
+    Route::get('{id}/orders/active', [DriverOrdersController::class, 'active'])
+        ->name('drivers.orders.active');
+
+    // Get order statistics for a driver
+    Route::get('{id}/orders/statistics', [DriverOrdersController::class, 'statistics'])
+        ->name('drivers.orders.statistics');
 });
