@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Src\Domain\OrderDomain\Enums\OrderStatus;
+use Src\Domain\OrderDomain\Models\Scopes\OrderScopes;
 use Src\Domain\DriverDomain\Models\Driver;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, OrderScopes;
 
     /**
      * The table associated with the model.
