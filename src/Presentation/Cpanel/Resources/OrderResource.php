@@ -22,7 +22,7 @@ class OrderResource extends JsonResource
                 'latitude' => (float) $this->pickup_latitude,
                 'longitude' => (float) $this->pickup_longitude,
             ],
-            'driver' => $this->when($this->relationLoaded('driver'), function () {
+            'driver' => $this->when($this->relationLoaded('driver') && $this->driver !== null, function () {
                 return [
                     'id' => $this->driver->id,
                     'name' => $this->driver->name,
